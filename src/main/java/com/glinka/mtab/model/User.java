@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
@@ -15,11 +14,28 @@ public class User {
     private Long id;
 
     @NotNull
-    @Column(name = "login", columnDefinition = "VARCHAR(128)")
+    @Column(unique = true, columnDefinition = "VARCHAR(128)")
     private String login;
 
     @NotNull
-    @Column(name = "password", columnDefinition = "VARCHAR(128)")
+    @Column(unique = true, columnDefinition = "VARCHAR(128)")
+    private String email;
+
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(128)")
     private String password;
+
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(128)")
+    private String firstName;
+
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(128)")
+    private String lastName;
+
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "roleId")
+    private Role role;
 
 }
