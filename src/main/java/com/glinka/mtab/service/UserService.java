@@ -1,9 +1,8 @@
 package com.glinka.mtab.service;
 
-import com.glinka.mtab.model.Role;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Role;
+import com.glinka.mtab.model.entity.User;
 
-import javax.persistence.Lob;
 import java.util.List;
 
 public interface UserService {

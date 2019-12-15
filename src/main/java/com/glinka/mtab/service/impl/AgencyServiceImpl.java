@@ -1,8 +1,9 @@
-package com.glinka.mtab.service;
+package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.Agency;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Agency;
+import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.repository.AgencyRepository;
+import com.glinka.mtab.service.AgencyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

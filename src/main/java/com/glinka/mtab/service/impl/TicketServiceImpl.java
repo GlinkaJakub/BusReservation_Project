@@ -1,9 +1,10 @@
-package com.glinka.mtab.service;
+package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.Ticket;
-import com.glinka.mtab.model.TripSchedule;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Ticket;
+import com.glinka.mtab.model.entity.TripSchedule;
+import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.repository.TicketRepository;
+import com.glinka.mtab.service.TicketService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

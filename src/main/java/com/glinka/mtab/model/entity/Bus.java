@@ -1,7 +1,7 @@
-package com.glinka.mtab.model;
+package com.glinka.mtab.model.entity;
 
+import com.glinka.mtab.model.entity.Agency;
 import lombok.Data;
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 

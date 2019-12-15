@@ -1,9 +1,9 @@
 package com.glinka.mtab.repository;
 
-import com.glinka.mtab.model.Agency;
-import com.glinka.mtab.model.Bus;
-import com.glinka.mtab.model.Stop;
-import com.glinka.mtab.model.Trip;
+import com.glinka.mtab.model.entity.Agency;
+import com.glinka.mtab.model.entity.Bus;
+import com.glinka.mtab.model.entity.Stop;
+import com.glinka.mtab.model.entity.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

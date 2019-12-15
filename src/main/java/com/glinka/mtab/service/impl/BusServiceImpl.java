@@ -1,14 +1,15 @@
-package com.glinka.mtab.service;
+package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.Agency;
-import com.glinka.mtab.model.Bus;
+import com.glinka.mtab.model.entity.Agency;
+import com.glinka.mtab.model.entity.Bus;
 import com.glinka.mtab.repository.BusRepository;
+import com.glinka.mtab.service.BusService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BusServiceImpl implements BusService{
+public class BusServiceImpl implements BusService {
 
     private final BusRepository busRepository;
 

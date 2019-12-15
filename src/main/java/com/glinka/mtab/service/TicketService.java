@@ -1,8 +1,8 @@
 package com.glinka.mtab.service;
 
-import com.glinka.mtab.model.Ticket;
-import com.glinka.mtab.model.TripSchedule;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Ticket;
+import com.glinka.mtab.model.entity.TripSchedule;
+import com.glinka.mtab.model.entity.User;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.glinka.mtab.service;
 
-import com.glinka.mtab.model.Stop;
+import com.glinka.mtab.model.entity.Stop;
 
 import java.util.List;
 

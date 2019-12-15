@@ -1,7 +1,7 @@
 package com.glinka.mtab.service;
 
-import com.glinka.mtab.model.Agency;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Agency;
+import com.glinka.mtab.model.entity.User;
 
 import java.util.List;
 

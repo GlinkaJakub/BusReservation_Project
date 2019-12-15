@@ -1,30 +1,28 @@
-package com.glinka.mtab.model;
+package com.glinka.mtab.model.entity;
 
 import lombok.Data;
-//import com.glinka.mtab.model.User;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class Agency {
+public class Stop {
 
     @Id
     @GeneratedValue
     private long id;
 
     @NotNull
+    @Column(unique = true)
     private String code;
 
     @NotNull
-    @Column(unique = true)
     private String name;
-
     private String details;
 
-    @OneToOne
-    @JoinColumn(name = "userId")
-    private User owner;
 
 }

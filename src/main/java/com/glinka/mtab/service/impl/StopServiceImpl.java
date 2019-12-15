@@ -1,7 +1,8 @@
-package com.glinka.mtab.service;
+package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.Stop;
+import com.glinka.mtab.model.entity.Stop;
 import com.glinka.mtab.repository.StopRepository;
+import com.glinka.mtab.service.StopService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

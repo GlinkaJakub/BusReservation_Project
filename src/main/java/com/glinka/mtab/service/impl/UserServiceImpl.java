@@ -1,8 +1,10 @@
-package com.glinka.mtab.service;
+package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.Role;
-import com.glinka.mtab.model.User;
+import com.glinka.mtab.model.entity.Role;
+import com.glinka.mtab.model.entity.User;
+import com.glinka.mtab.repository.RoleRepository;
 import com.glinka.mtab.repository.UserRepository;
+import com.glinka.mtab.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +13,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override

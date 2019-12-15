@@ -1,5 +1,8 @@
-package com.glinka.mtab.model;
+package com.glinka.mtab.model.entity;
 
+import com.glinka.mtab.model.entity.Agency;
+import com.glinka.mtab.model.entity.Bus;
+import com.glinka.mtab.model.entity.Stop;
 import lombok.Data;
 
 import javax.persistence.*;
