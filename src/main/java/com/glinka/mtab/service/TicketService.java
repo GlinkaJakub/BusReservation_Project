@@ -14,6 +14,8 @@ public interface TicketService {
 
     List<Ticket> findAllByTripSchedule(TripSchedule tripSchedule);
 
+    List<Long> findAllByTripScheduleId(Long tripScheduleId);
+
     List<Ticket> findAllByCancellableAndTripSchedule(boolean cancellable, TripSchedule tripSchedule);
 
     Ticket findById(Long id);

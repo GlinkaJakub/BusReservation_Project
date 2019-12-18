@@ -5,6 +5,7 @@ import com.glinka.mtab.model.entity.Trip;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,5 +26,5 @@ public class TripSchedule {
 
     @OneToMany
     @JoinColumn(name = "ticketId")
-    private Set<Ticket> ticketSold;
+    private List<Ticket> ticketSold;
 }

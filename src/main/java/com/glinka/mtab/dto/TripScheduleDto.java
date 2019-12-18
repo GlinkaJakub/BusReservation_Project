@@ -8,6 +8,7 @@ import java.util.List;
 public class TripScheduleDto {
 
     private long id;
+    private String tripDate;
     private int availableSeats;
     private Long tripDetailsId;
     private List<Long> ticketSoldId;

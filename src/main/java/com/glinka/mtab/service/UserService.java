@@ -13,7 +13,9 @@ public interface UserService {
 //    List<UserDto> findAllByRole(Long role);
 //    List<User> findAllByRole(String role);
 
-    UserDto findById(Long id);
+    UserDto findByIdDto(Long id);
+
+    User findById(Long id);
 
     UserDto findByLogin(String login);
 

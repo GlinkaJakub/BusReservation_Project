@@ -4,9 +4,11 @@ import com.glinka.mtab.model.entity.Ticket;
 import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.repository.TicketRepository;
+import com.glinka.mtab.repository.TripScheduleRepository;
 import com.glinka.mtab.service.TicketService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,8 +16,11 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository) {
+    private final TripScheduleRepository tripScheduleRepository;
+
+    public TicketServiceImpl(TicketRepository ticketRepository, TripScheduleRepository tripScheduleRepository) {
         this.ticketRepository = ticketRepository;
+        this.tripScheduleRepository = tripScheduleRepository;
     }
 
     @Override
@@ -31,6 +36,20 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<Ticket> findAllByTripSchedule(TripSchedule tripSchedule) {
         return ticketRepository.findAllByTripSchedule(tripSchedule);
+    }
+
+    @Override
+    public List<Long> findAllByTripScheduleId(Long tripScheduleId){
+
+        TripSchedule tripSchedule = tripScheduleRepository.findById(tripScheduleId).orElse(null);
+        List<Ticket> tickets = ticketRepository.findAllByTripSchedule(tripSchedule);
+        List<Long> ticketsId = new ArrayList<Long>();
+
+        for (Ticket ticket : tickets){
+            ticketsId.add(ticket.getId());
+        }
+
+        return ticketsId;
     }
 
     @Override

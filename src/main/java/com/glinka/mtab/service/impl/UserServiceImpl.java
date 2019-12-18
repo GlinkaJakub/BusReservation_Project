@@ -42,10 +42,15 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public UserDto findById(Long id) {
+    public UserDto findByIdDto(Long id) {
         return userDtoToEntityConverter.convert(
                 userRepository.findById(id).orElse(null)
         );
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
