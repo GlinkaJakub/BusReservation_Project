@@ -36,7 +36,7 @@ public class User {
     @Column(columnDefinition = "VARCHAR(128)")
     private String lastName;
 
-    @NotNull
+//    @NotNull
     @OneToOne
     @JoinColumn(name = "roleId")
     private Role role;

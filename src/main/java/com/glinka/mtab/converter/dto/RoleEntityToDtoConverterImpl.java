@@ -1,7 +1,7 @@
 package com.glinka.mtab.converter.dto;
 
 import com.glinka.mtab.converter.ConverterAdapter;
-import com.glinka.mtab.model.dto.RoleDto;
+import com.glinka.mtab.dto.RoleDto;
 import com.glinka.mtab.model.entity.Role;
 import org.springframework.stereotype.Component;
 

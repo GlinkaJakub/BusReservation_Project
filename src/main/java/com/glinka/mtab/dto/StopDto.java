@@ -1,4 +1,4 @@
-package com.glinka.mtab.model.dto;
+package com.glinka.mtab.dto;
 
 import com.glinka.mtab.model.entity.Stop;
 import lombok.Data;

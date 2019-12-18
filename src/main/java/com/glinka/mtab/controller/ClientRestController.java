@@ -1,6 +1,7 @@
 package com.glinka.mtab.controller;
 
-import com.glinka.mtab.model.dto.RoleDto;
+import com.glinka.mtab.dto.RoleDto;
+import com.glinka.mtab.dto.UserDto;
 import com.glinka.mtab.model.entity.Role;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.service.RoleService;
@@ -30,7 +31,7 @@ public class ClientRestController {
     }
 
     @GetMapping("/all")
-    public List<User> findAll(){
+    public List<UserDto> findAll(){
         return userService.findAll();
     }
 
@@ -46,7 +47,7 @@ public class ClientRestController {
     }
 
     @PostMapping("/save")
-    public User saveClient(@RequestBody User client){
+    public User saveClient(@RequestBody UserDto client){
         return userService.save(client);
     }
 

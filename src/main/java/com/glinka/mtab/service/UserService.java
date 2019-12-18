@@ -1,5 +1,6 @@
 package com.glinka.mtab.service;
 
+import com.glinka.mtab.dto.UserDto;
 import com.glinka.mtab.model.entity.Role;
 import com.glinka.mtab.model.entity.User;
 
@@ -7,16 +8,16 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<UserDto> findAll();
 
-    List<User> findAllByRole(Role role);
+//    List<UserDto> findAllByRole(Long role);
 //    List<User> findAllByRole(String role);
 
-    User findById(Long id);
+    UserDto findById(Long id);
 
-    User findByLogin(String login);
+    UserDto findByLogin(String login);
 
-    User save(User user);
+    User save(UserDto user);
 
     boolean deleteBiId(Long id);
 

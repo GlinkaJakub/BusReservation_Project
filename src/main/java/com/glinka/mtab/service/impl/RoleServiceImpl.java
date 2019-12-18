@@ -1,7 +1,7 @@
 package com.glinka.mtab.service.impl;
 
 import com.glinka.mtab.converter.Converter;
-import com.glinka.mtab.model.dto.RoleDto;
+import com.glinka.mtab.dto.RoleDto;
 import com.glinka.mtab.model.entity.Role;
 import com.glinka.mtab.repository.RoleRepository;
 import com.glinka.mtab.service.RoleService;
@@ -29,6 +29,12 @@ public class RoleServiceImpl implements RoleService {
         );
 //        return roleRepository.findAll();
 //        return new ModelMapper().map(roles, listType);
+    }
+
+    @Override
+    public Role findById(Long id) {
+        System.out.println(roleRepository.findById(id).orElse(null));
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override
