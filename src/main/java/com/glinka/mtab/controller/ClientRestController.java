@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientRestController {
 
-
     private UserService userService;
     private RoleService roleService;
 

@@ -29,7 +29,6 @@ public class TripScheduleDtoToEntityConverter extends ConverterAdapter<TripSched
         target.setTripDate(source.getTripDate());
         target.setAvailableSeats(source.getAvailableSeats());
         target.setTripDetails(tripService.findById(source.getTripDetailsId()));
-        //TODO
         target.setTicketSold(ticketService.findAllByTripSchedule(tripScheduleService.findById(source.getId())));
 
         return target;

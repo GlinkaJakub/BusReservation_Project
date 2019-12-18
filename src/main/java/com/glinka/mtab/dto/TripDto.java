@@ -6,6 +6,7 @@ import lombok.Data;
 public class TripDto {
 
     private long id;
+    private int fare;
     private String journeyTime;
     private Long sourceStopId;
     private Long destStopId;

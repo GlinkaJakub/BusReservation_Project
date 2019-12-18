@@ -6,6 +6,7 @@ import lombok.Data;
 public class TicketDto {
 
     private long id;
+    private int seatNumber;
     private Boolean cancellable;
     private String journeyDate;
     private Long passengerId;
