@@ -20,11 +20,11 @@ public class Trip {
     private String journeyTime;
 
     @OneToOne
-//    @JoinColumn(name = "stopId")
+    @JoinColumn(name = "sourceStopId")
     private Stop sourceStop;
 
     @OneToOne
-//    @JoinColumn(name = "stopId")
+    @JoinColumn(name = "destStopId")
     private Stop destStop;
 
     @OneToOne

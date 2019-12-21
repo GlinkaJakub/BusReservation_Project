@@ -18,7 +18,7 @@ public class TicketEntityToDtoConverter extends ConverterAdapter<TicketDto, Tick
         target.setCancellable(source.getCancellable());
         target.setJourneyDate(source.getJourneyDate());
         target.setPassengerId(source.getPassenger().getId());
-        target.setTripscheduleId(source.getTripSchedule().getId());
+        target.setTripScheduleId(source.getTripSchedule().getId());
 
         return target;
     }

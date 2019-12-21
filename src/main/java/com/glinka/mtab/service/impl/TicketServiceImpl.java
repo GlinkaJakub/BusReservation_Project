@@ -1,11 +1,14 @@
 package com.glinka.mtab.service.impl;
 
+import com.glinka.mtab.converter.Converter;
+import com.glinka.mtab.dto.TicketDto;
 import com.glinka.mtab.model.entity.Ticket;
 import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.repository.TicketRepository;
 import com.glinka.mtab.repository.TripScheduleRepository;
 import com.glinka.mtab.service.TicketService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,14 +21,22 @@ public class TicketServiceImpl implements TicketService {
 
     private final TripScheduleRepository tripScheduleRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TripScheduleRepository tripScheduleRepository) {
+    private final Converter<TicketDto, Ticket> ticketDtoToEntityConverter;
+    private final Converter<Ticket, TicketDto> ticketEntityToDtoConverter;
+
+
+    public TicketServiceImpl(TicketRepository ticketRepository, TripScheduleRepository tripScheduleRepository, @Lazy Converter<TicketDto, Ticket> ticketDtoToEntityConverter, @Lazy Converter<Ticket, TicketDto> ticketEntityToDtoConverter) {
         this.ticketRepository = ticketRepository;
         this.tripScheduleRepository = tripScheduleRepository;
+        this.ticketDtoToEntityConverter = ticketDtoToEntityConverter;
+        this.ticketEntityToDtoConverter = ticketEntityToDtoConverter;
     }
 
     @Override
-    public List<Ticket> findAll() {
-        return ticketRepository.findAll();
+    public List<TicketDto> findAll() {
+        return ticketDtoToEntityConverter.convertToList(
+                ticketRepository.findAll()
+        );
     }
 
     @Override
@@ -68,7 +79,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Ticket save(TicketDto ticketDto) {
+        Ticket ticket = ticketEntityToDtoConverter.convert(ticketDto);
         return ticketRepository.saveAndFlush(ticket);
     }
 

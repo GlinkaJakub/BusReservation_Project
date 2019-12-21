@@ -12,14 +12,13 @@ import org.springframework.stereotype.Component;
 public class TripScheduleDtoToEntityConverter extends ConverterAdapter<TripSchedule, TripScheduleDto> {
 
     private final TripService tripService;
-    private final TicketService ticketService;
-    private final TripScheduleService tripScheduleService;
+//    private final TicketService ticketService;
+//    private final TripScheduleService tripScheduleService;
 
-    public TripScheduleDtoToEntityConverter(TripService tripService, TicketService ticketService, TripScheduleService tripScheduleService) {
+    public TripScheduleDtoToEntityConverter(TripService tripService) {
         this.tripService = tripService;
-        this.ticketService = ticketService;
-        this.tripScheduleService = tripScheduleService;
     }
+
 
     @Override
     public TripSchedule convert(TripSchedule target, TripScheduleDto source) {
@@ -29,7 +28,7 @@ public class TripScheduleDtoToEntityConverter extends ConverterAdapter<TripSched
         target.setTripDate(source.getTripDate());
         target.setAvailableSeats(source.getAvailableSeats());
         target.setTripDetails(tripService.findById(source.getTripDetailsId()));
-        target.setTicketSold(ticketService.findAllByTripSchedule(tripScheduleService.findById(source.getId())));
+//        target.setTicketSold(null);
 
         return target;
     }

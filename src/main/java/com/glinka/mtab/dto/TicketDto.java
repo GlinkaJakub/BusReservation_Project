@@ -10,6 +10,6 @@ public class TicketDto {
     private Boolean cancellable;
     private String journeyDate;
     private Long passengerId;
-    private Long tripscheduleId;
+    private Long tripScheduleId;
 
 }

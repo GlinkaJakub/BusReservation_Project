@@ -24,7 +24,7 @@ public class TripSchedule {
     @JoinColumn(name = "tripId")
     private Trip tripDetails;
 
-    @OneToMany
+    @OneToMany//(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticketId")
     private List<Ticket> ticketSold;
 }

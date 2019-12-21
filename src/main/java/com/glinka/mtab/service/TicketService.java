@@ -1,5 +1,6 @@
 package com.glinka.mtab.service;
 
+import com.glinka.mtab.dto.TicketDto;
 import com.glinka.mtab.model.entity.Ticket;
 import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.model.entity.User;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface TicketService {
 
-    List<Ticket> findAll();
+    List<TicketDto> findAll();
 
     List<Ticket> findAllByPassenger(User passenger);
 
@@ -22,7 +23,7 @@ public interface TicketService {
 
     Ticket findBySeatNumber(int seatNumber);
 
-    Ticket save(Ticket ticket);
+    Ticket save(TicketDto ticketDto);
 
     boolean deleteById(Long id);
 

@@ -4,6 +4,7 @@ import com.glinka.mtab.converter.ConverterAdapter;
 import com.glinka.mtab.dto.TicketDto;
 import com.glinka.mtab.model.entity.Ticket;
 import com.glinka.mtab.model.entity.TripSchedule;
+import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.service.TripScheduleService;
 import com.glinka.mtab.service.UserService;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,8 @@ public class TicketDtoToEntityConverter extends ConverterAdapter<Ticket, TicketD
     private final UserService userService;
     private final TripScheduleService tripScheduleService;
 
-    public TicketDtoToEntityConverter(UserService userService, TripScheduleService tripScheduleService) {
+    public TicketDtoToEntityConverter(UserService userService,
+                                      TripScheduleService tripScheduleService) {
         this.userService = userService;
         this.tripScheduleService = tripScheduleService;
     }
@@ -27,8 +29,8 @@ public class TicketDtoToEntityConverter extends ConverterAdapter<Ticket, TicketD
         target.setSeatNumber(source.getSeatNumber());
         target.setCancellable(source.getCancellable());
         target.setJourneyDate(source.getJourneyDate());
-        target.setPassenger(userService.findById(source.getId()));
-        target.setTripSchedule(tripScheduleService.findById(source.getTripscheduleId()));
+        target.setPassenger(userService.findById(source.getPassengerId()));
+        target.setTripSchedule(tripScheduleService.findById(source.getTripScheduleId()));
 
         return target;
     }

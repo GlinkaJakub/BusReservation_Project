@@ -1,5 +1,7 @@
 package com.glinka.mtab.service.impl;
 
+import com.glinka.mtab.converter.Converter;
+import com.glinka.mtab.dto.StopDto;
 import com.glinka.mtab.model.entity.Stop;
 import com.glinka.mtab.repository.StopRepository;
 import com.glinka.mtab.service.StopService;
@@ -12,13 +14,21 @@ public class StopServiceImpl implements StopService {
 
     private final StopRepository stopRepository;
 
-    public StopServiceImpl(StopRepository stopRepository) {
+    private final Converter<StopDto, Stop> stopDtoToEntityConverter;
+    private final Converter<Stop, StopDto> stopEntityToDtoConverter;
+
+
+    public StopServiceImpl(StopRepository stopRepository, Converter<StopDto, Stop> stopDtoToEntityConverter, Converter<Stop, StopDto> stopEntityToDtoConverter) {
         this.stopRepository = stopRepository;
+        this.stopDtoToEntityConverter = stopDtoToEntityConverter;
+        this.stopEntityToDtoConverter = stopEntityToDtoConverter;
     }
 
     @Override
-    public List<Stop> findAll() {
-        return stopRepository.findAll();
+    public List<StopDto> findAll() {
+        return stopDtoToEntityConverter.convertToList(
+                stopRepository.findAll()
+        );
     }
 
     @Override
@@ -32,7 +42,8 @@ public class StopServiceImpl implements StopService {
     }
 
     @Override
-    public Stop save(Stop stop) {
+    public Stop save(StopDto stopDto) {
+        Stop stop = stopEntityToDtoConverter.convert(stopDto);
         return stopRepository.saveAndFlush(stop);
     }
 

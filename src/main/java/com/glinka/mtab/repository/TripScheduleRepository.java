@@ -13,6 +13,6 @@ public interface TripScheduleRepository extends JpaRepository<TripSchedule, Long
 
     List<TripSchedule> findAllByTripDetailsAndTripDate(Trip trip, String tripDate);
 
-    TripSchedule findByTicketSold(Ticket ticket);
+//    TripSchedule findByTicketSold(Ticket ticket);
 
 }

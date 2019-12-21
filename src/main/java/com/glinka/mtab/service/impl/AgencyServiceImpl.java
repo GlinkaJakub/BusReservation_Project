@@ -1,5 +1,7 @@
 package com.glinka.mtab.service.impl;
 
+import com.glinka.mtab.converter.Converter;
+import com.glinka.mtab.dto.AgencyDto;
 import com.glinka.mtab.model.entity.Agency;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.repository.AgencyRepository;
@@ -13,13 +15,21 @@ public class AgencyServiceImpl implements AgencyService {
 
     private final AgencyRepository agencyRepository;
 
-    public AgencyServiceImpl(AgencyRepository agencyRepository) {
+    private final Converter<AgencyDto, Agency> agencyDtoToEntityConverter;
+    private final Converter<Agency, AgencyDto> agencyEntityToDtoConverter;
+
+
+    public AgencyServiceImpl(AgencyRepository agencyRepository, Converter<AgencyDto, Agency> agencyDtoToEntityConverter, Converter<Agency, AgencyDto> agencyEntityToDtoConverter) {
         this.agencyRepository = agencyRepository;
+        this.agencyDtoToEntityConverter = agencyDtoToEntityConverter;
+        this.agencyEntityToDtoConverter = agencyEntityToDtoConverter;
     }
 
     @Override
-    public List<Agency> findAll() {
-        return agencyRepository.findAll();
+    public List<AgencyDto> findAll() {
+        return agencyDtoToEntityConverter.convertToList(
+                agencyRepository.findAll()
+        );
     }
 
     @Override
@@ -38,7 +48,8 @@ public class AgencyServiceImpl implements AgencyService {
     }
 
     @Override
-    public Agency save(Agency agency) {
+    public Agency save(AgencyDto agencyDto) {
+        Agency agency = agencyEntityToDtoConverter.convert(agencyDto);
         return agencyRepository.saveAndFlush(agency);
     }
 

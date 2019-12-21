@@ -1,9 +1,8 @@
 package com.glinka.mtab.service.impl;
 
-import com.glinka.mtab.model.entity.Agency;
-import com.glinka.mtab.model.entity.Bus;
-import com.glinka.mtab.model.entity.Stop;
-import com.glinka.mtab.model.entity.Trip;
+import com.glinka.mtab.converter.Converter;
+import com.glinka.mtab.dto.TripDto;
+import com.glinka.mtab.model.entity.*;
 import com.glinka.mtab.repository.TripRepository;
 import com.glinka.mtab.service.TripService;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,21 @@ public class TripServiceImpl implements TripService {
 
     private final TripRepository tripRepository;
 
-    public TripServiceImpl(TripRepository tripRepository) {
+    private final Converter<TripDto, Trip> tripDtoToEntityConverter;
+    private final Converter<Trip, TripDto> tripEntityToDtoConverter;
+
+
+    public TripServiceImpl(TripRepository tripRepository, Converter<TripDto, Trip> tripDtoToEntityConverter, Converter<Trip, TripDto> tripEntityToDtoConverter) {
         this.tripRepository = tripRepository;
+        this.tripDtoToEntityConverter = tripDtoToEntityConverter;
+        this.tripEntityToDtoConverter = tripEntityToDtoConverter;
     }
 
     @Override
-    public List<Trip> findAll() {
-        return tripRepository.findAll();
+    public List<TripDto> findAll() {
+        return tripDtoToEntityConverter.convertToList(
+                tripRepository.findAll()
+        );
     }
 
     @Override
@@ -55,7 +62,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Trip save(Trip trip) {
+    public Trip save(TripDto tripDto) {
+        Trip trip = tripEntityToDtoConverter.convert(tripDto);
         return tripRepository.saveAndFlush(trip);
     }
 

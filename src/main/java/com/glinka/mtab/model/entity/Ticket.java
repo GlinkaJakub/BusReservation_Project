@@ -22,7 +22,7 @@ public class Ticket {
     @JoinColumn(name = "userId")
     private User passenger;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "tripScheduleId")
     private TripSchedule tripSchedule;
 

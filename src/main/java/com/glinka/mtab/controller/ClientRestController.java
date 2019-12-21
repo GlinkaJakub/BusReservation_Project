@@ -1,53 +1,124 @@
 package com.glinka.mtab.controller;
 
-import com.glinka.mtab.dto.RoleDto;
-import com.glinka.mtab.dto.UserDto;
-import com.glinka.mtab.model.entity.Role;
-import com.glinka.mtab.model.entity.User;
-import com.glinka.mtab.service.RoleService;
-import com.glinka.mtab.service.UserService;
+import com.glinka.mtab.dto.*;
+import com.glinka.mtab.model.entity.*;
+import com.glinka.mtab.service.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Controller
 @RestController
 @RequestMapping("/client")
 public class ClientRestController {
 
-    private UserService userService;
-    private RoleService roleService;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final AgencyService agencyService;
+    private final BusService busService;
+    private final StopService stopService;
+    private final TicketService ticketService;
+    private final TripService tripService;
+    private final TripScheduleService tripScheduleService;
 
-    public ClientRestController(UserService userService, RoleService roleService) {
+    public ClientRestController(UserService userService, RoleService roleService, AgencyService agencyService, BusService busService, StopService stopService, TicketService ticketService, TripService tripService, TripScheduleService tripScheduleService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.agencyService = agencyService;
+        this.busService = busService;
+        this.stopService = stopService;
+        this.ticketService = ticketService;
+        this.tripService = tripService;
+        this.tripScheduleService = tripScheduleService;
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "Test";
-    }
-
-    @GetMapping("/all")
+    @GetMapping("/allUsers")
     public List<UserDto> findAll(){
         return userService.findAll();
     }
 
-    @GetMapping("/allRole")
+    @GetMapping("/allRoles")
     public List<RoleDto> findAllRoles(){
         return roleService.findAll();
     }
 
+    @GetMapping("/allAgencies")
+    public List<AgencyDto> findAllAgencies() {
+        return agencyService.findAll();
+    }
+
+    @GetMapping("/allBuses")
+    public List<BusDto> findAllBuses() {
+        return busService.findAll();
+    }
+
+    @GetMapping("/allStops")
+    public List<StopDto> findAllStops() {
+        return stopService.findAll();
+    }
+
+    @GetMapping("/allTrips")
+    public List<TripDto> findAllTrips() {
+        return tripService.findAll();
+    }
+
+    @GetMapping("/allTickets")
+    public List<TicketDto> findAllTickets() {
+        return ticketService.findAll();
+    }
+
+    @GetMapping("/allTripSchedules")
+    public List<TripScheduleDto> findAllTripSchedules() {
+        return tripScheduleService.findAll();
+    }
+
+//-----------------------Save-element-------------------------------------------------------------------
+
     @Transactional
-    @PostMapping("/addRole")
+    @PostMapping("/saveRole")
     public Role addRole(@RequestBody RoleDto roleDto){
         return roleService.save(roleDto);
     }
 
-    @PostMapping("/save")
-    public User saveClient(@RequestBody UserDto client){
-        return userService.save(client);
+    @Transactional
+    @PostMapping("/saveUser")
+    public User saveClient(@RequestBody UserDto userDto){
+        return userService.save(userDto);
     }
 
+    @Transactional
+    @PostMapping("/saveAgency")
+    public Agency saveAgency(@RequestBody AgencyDto agencyDto) {
+        return agencyService.save(agencyDto);
+    }
+
+    @Transactional
+    @PostMapping("/saveBus")
+    public Bus saveBus(@RequestBody BusDto busDto) {
+        return busService.save(busDto);
+    }
+
+    @Transactional
+    @PostMapping("/saveStop")
+    public Stop saveStop(@RequestBody StopDto stopDto) {
+        return stopService.save(stopDto);
+    }
+
+    @Transactional
+    @PostMapping("/saveTicket")
+    public Ticket saveTicket(@RequestBody TicketDto ticketDto) {
+        return ticketService.save(ticketDto);
+    }
+
+    @Transactional
+    @PostMapping("/saveTrip")
+    public Trip saveTrip(@RequestBody TripDto tripDto) {
+        return tripService.save(tripDto);
+    }
+
+    @Transactional
+    @PostMapping("/saveTripSchedule")
+    public TripSchedule saveTripSchedule(@RequestBody TripScheduleDto tripScheduleDto) {
+        return tripScheduleService.save(tripScheduleDto);
+    }
 }

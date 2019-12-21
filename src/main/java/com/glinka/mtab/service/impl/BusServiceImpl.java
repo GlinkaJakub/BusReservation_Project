@@ -1,5 +1,7 @@
 package com.glinka.mtab.service.impl;
 
+import com.glinka.mtab.converter.Converter;
+import com.glinka.mtab.dto.BusDto;
 import com.glinka.mtab.model.entity.Agency;
 import com.glinka.mtab.model.entity.Bus;
 import com.glinka.mtab.repository.BusRepository;
@@ -13,13 +15,21 @@ public class BusServiceImpl implements BusService {
 
     private final BusRepository busRepository;
 
-    public BusServiceImpl(BusRepository busRepository) {
+    private final Converter<BusDto, Bus> busDtoToEntityConverter;
+    private final Converter<Bus, BusDto> busEntityToDtoConverter;
+
+
+    public BusServiceImpl(BusRepository busRepository, Converter<BusDto, Bus> busDtoToEntityConverter, Converter<Bus, BusDto> busEntityToDtoConverter) {
         this.busRepository = busRepository;
+        this.busDtoToEntityConverter = busDtoToEntityConverter;
+        this.busEntityToDtoConverter = busEntityToDtoConverter;
     }
 
     @Override
-    public List<Bus> findAll() {
-        return busRepository.findAll();
+    public List<BusDto> findAll() {
+        return busDtoToEntityConverter.convertToList(
+                busRepository.findAll()
+        );
     }
 
     @Override
@@ -33,7 +43,8 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public Bus save(Bus bus) {
+    public Bus save(BusDto busDto) {
+        Bus bus = busEntityToDtoConverter.convert(busDto);
         return busRepository.saveAndFlush(bus);
     }
 
