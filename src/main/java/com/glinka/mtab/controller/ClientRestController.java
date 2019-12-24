@@ -121,4 +121,58 @@ public class ClientRestController {
     public TripSchedule saveTripSchedule(@RequestBody TripScheduleDto tripScheduleDto) {
         return tripScheduleService.save(tripScheduleDto);
     }
+
+    //-----------------------Delete-element-------------------------------------------------------------------
+
+    @GetMapping("/deleteRole")
+    public boolean deleteRole(@RequestParam("id") Long id){
+        return roleService.deleteById(id);
+    }
+
+    @GetMapping("/deleteUser")
+    public boolean deleteUser(@RequestParam("id") Long id){
+        return userService.deleteBiId(id);
+    }
+
+    @GetMapping("/deleteAgency")
+    public boolean deleteAgency(@RequestParam("id") Long id){
+        return agencyService.deleteById(id);
+    }
+
+    @GetMapping("/deleteBus")
+    public boolean deleteBus(@RequestParam("id") Long id){
+        return busService.deleteById(id);
+    }
+
+    @GetMapping("/deleteStop")
+    public boolean deleteStop(@RequestParam("id") Long id){
+        return stopService.deleteById(id);
+    }
+
+    @GetMapping("/deleteTicket")
+    public boolean deleteTicket(@RequestParam("id") Long id){
+        return ticketService.deleteById(id);
+    }
+
+    @GetMapping("/deleteTrip")
+    public boolean deleteTrip(@RequestParam("id") Long id){
+        return tripService.deleteById(id);
+    }
+
+    @GetMapping("/deleteTripSchedule")
+    public boolean deleteTripSchedule(@RequestParam("id") Long id){
+        return tripScheduleService.deleteById(id);
+    }
+//TODO
+    //-----------------------Find-by-agency------------------------------------------------------------------
+
+    //-----------------------Find-trips-by-stops-------------------------------------------------------------
+
+    //-----------------------Find-trips-^--------------------------------------------------------------------
+
+    //-----------------------Find-by-agency-bus/trip---------------------------------------------------------
+
+    //-----------------------Book-ticket---------------------------------------------------------------------
+
+
 }
