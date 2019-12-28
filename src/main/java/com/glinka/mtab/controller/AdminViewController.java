@@ -33,29 +33,29 @@ public class AdminViewController {
         this.tripScheduleService = tripScheduleService;
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestBody UserDto user){
-        return "login";
-    }
-
-    @PostMapping("/signup")
-    public String signup(@RequestBody UserDto user){
-        return "signup";
-    }
-
-    @GetMapping("/agency")
-    public String viewAgency(@RequestParam("agencyId") Long agencyId){
-        return "agency";
-    }
-
-    @GetMapping("/buses")
-    public String viewBuses(@RequestParam("agencyId") Long agencyId){
-        return "buses";
-    }
-
-    @GetMapping("/trips")
-    public String viewTrips(@RequestParam("agencyId") Long agencyId){
-        return "trips";
-    }
+//    @PostMapping("/login")
+//    public String loginUser(@RequestBody UserDto user){
+//        return "login";
+//    }
+//
+//    @PostMapping("/signup")
+//    public String signup(@RequestBody UserDto user){
+//        return "signup";
+//    }
+//
+//    @GetMapping("/agency")
+//    public String viewAgency(@RequestParam("agencyId") Long agencyId){
+//        return "agency";
+//    }
+//
+//    @GetMapping("/buses")
+//    public String viewBuses(@RequestParam("agencyId") Long agencyId){
+//        return "buses";
+//    }
+//
+//    @GetMapping("/trips")
+//    public String viewTrips(@RequestParam("agencyId") Long agencyId){
+//        return "trips";
+//    }
 
 }

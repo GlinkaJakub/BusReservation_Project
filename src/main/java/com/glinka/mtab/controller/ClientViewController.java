@@ -42,26 +42,26 @@ public class ClientViewController {
         return "hello";
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestBody UserDto user){
-        return "login";
-    }
+//    @PostMapping("/login")
+//    public String loginUser(@RequestBody UserDto user){
+//        return "login";
+//    }
+//
+//    @PostMapping("/signup")
+//    public String signup(@RequestBody UserDto user){
+//        return "signup";
+//    }
 
-    @PostMapping("/signup")
-    public String signup(@RequestBody UserDto user){
-        return "signup";
-    }
-
-    @GetMapping("/trips")
-    public String findTrip(@RequestParam("source") String source, @RequestParam("dest") String dest, @RequestParam("date") String date){
-        return "trips";
-    }
-
-    @GetMapping("/book")
-    public String bookTicket(@RequestParam("ticketId") Long id){
-        return "book";
-    }
-
+//    @GetMapping("/trips")
+//    public String findTrip(@RequestParam("source") String source, @RequestParam("dest") String dest, @RequestParam("date") String date){
+//        return "trips";
+//    }
+//
+//    @GetMapping("/book")
+//    public String bookTicket(@RequestParam("ticketId") Long id){
+//        return "book";
+//    }
+//
 
 
 }

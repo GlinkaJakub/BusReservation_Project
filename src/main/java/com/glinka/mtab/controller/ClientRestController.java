@@ -165,7 +165,11 @@ public class ClientRestController {
     }
 //TODO
     //-----------------------Find-by-agency------------------------------------------------------------------
-
+    //----------Trip-Schedule--------------------------------------------------------------------------------
+    @GetMapping("/findByAgency")
+    public List<TripSchedule> findByAgency(@RequestParam("id") Long id){
+        return tripScheduleService.findAllByAgency(id);
+    }
     //-----------------------Find-trips-by-stops-------------------------------------------------------------
 
     //-----------------------Find-trips-^--------------------------------------------------------------------

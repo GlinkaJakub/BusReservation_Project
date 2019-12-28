@@ -2,26 +2,35 @@ package com.glinka.mtab.service.impl;
 
 import com.glinka.mtab.converter.Converter;
 import com.glinka.mtab.dto.TripScheduleDto;
+import com.glinka.mtab.model.entity.Agency;
 import com.glinka.mtab.model.entity.Trip;
 import com.glinka.mtab.model.entity.TripSchedule;
+import com.glinka.mtab.repository.AgencyRepository;
+import com.glinka.mtab.repository.TripRepository;
 import com.glinka.mtab.repository.TripScheduleRepository;
 import com.glinka.mtab.service.TripScheduleService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class TripScheduleServiceImpl implements TripScheduleService {
 
     private final TripScheduleRepository tripScheduleRepository;
+    private final TripRepository tripRepository;
+    private final AgencyRepository agencyRepository;
 
     private final Converter<TripScheduleDto, TripSchedule> tripScheduleDtoToEntityConverter;
     private final Converter<TripSchedule, TripScheduleDto> tripScheduleEntityToDtoConverter;
 
 
-    public TripScheduleServiceImpl(TripScheduleRepository tripScheduleRepository, @Lazy Converter<TripScheduleDto, TripSchedule> tripScheduleDtoToEntityConverter, @Lazy Converter<TripSchedule, TripScheduleDto> tripScheduleEntityToDtoConverter) {
+    public TripScheduleServiceImpl(TripScheduleRepository tripScheduleRepository, TripRepository tripRepository, AgencyRepository agencyRepository, @Lazy Converter<TripScheduleDto, TripSchedule> tripScheduleDtoToEntityConverter, @Lazy Converter<TripSchedule, TripScheduleDto> tripScheduleEntityToDtoConverter) {
         this.tripScheduleRepository = tripScheduleRepository;
+        this.tripRepository = tripRepository;
+        this.agencyRepository = agencyRepository;
         this.tripScheduleDtoToEntityConverter = tripScheduleDtoToEntityConverter;
         this.tripScheduleEntityToDtoConverter = tripScheduleEntityToDtoConverter;
     }
@@ -52,6 +61,21 @@ public class TripScheduleServiceImpl implements TripScheduleService {
 //    public TripSchedule findByTicket(Ticket ticket) {
 //        return tripScheduleRepository.findByTicketSold(ticket);
 //    }
+
+    @Override
+    public List<TripSchedule> findAllByAgency(Long agencyId) {
+        Agency agency = agencyRepository.findById(agencyId).orElse(null);
+        if (agency == null) {
+            return null;
+        }
+        List<Trip> trips = tripRepository.findAllByAgency(agency);
+        List<TripSchedule> tripScheduleList = new ArrayList<>();
+        for (Trip trip : trips) {
+            tripScheduleRepository.findAllByTripDetails(trip);
+            tripScheduleList.addAll(findAllByTripDetails(trip));
+        }
+        return tripScheduleList;
+    }
 
     @Override
     public TripSchedule save(TripScheduleDto tripScheduleDto) {

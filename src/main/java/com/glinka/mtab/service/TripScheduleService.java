@@ -1,6 +1,7 @@
 package com.glinka.mtab.service;
 
 import com.glinka.mtab.dto.TripScheduleDto;
+import com.glinka.mtab.model.entity.Agency;
 import com.glinka.mtab.model.entity.Ticket;
 import com.glinka.mtab.model.entity.Trip;
 import com.glinka.mtab.model.entity.TripSchedule;
@@ -14,6 +15,8 @@ public interface TripScheduleService {
     List<TripSchedule> findAllByTripDetails(Trip trip);
 
     List<TripSchedule> findAllByTripDetailsAndTripDate(Trip trip, String tripDate);
+
+    List<TripSchedule> findAllByAgency(Long agencyId);
 
     TripSchedule findById(Long id);
 
