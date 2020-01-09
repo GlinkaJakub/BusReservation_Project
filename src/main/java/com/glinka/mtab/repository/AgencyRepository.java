@@ -11,5 +11,4 @@ public interface AgencyRepository extends JpaRepository<Agency, Long> {
     List<Agency> findAllByOwner(User user);
 
     Agency findByName(String name);
-
 }

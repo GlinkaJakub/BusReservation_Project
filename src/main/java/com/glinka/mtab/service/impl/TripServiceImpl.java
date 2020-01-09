@@ -57,6 +57,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public List<Trip> findAllBySourceStopAndDestStop(Stop source, Stop dest) {
+        return tripRepository.findAllBySourceStopAndDestStop(source, dest);
+    }
+
+    @Override
     public Trip findById(Long id) {
         return tripRepository.findById(id).orElse(null);
     }

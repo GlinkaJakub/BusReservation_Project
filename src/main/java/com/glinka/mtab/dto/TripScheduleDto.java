@@ -12,5 +12,4 @@ public class TripScheduleDto {
     private int availableSeats;
     private Long tripDetailsId;
     private List<Long> ticketSoldId;
-
 }

@@ -10,7 +10,7 @@ public interface BusService {
 
     List<BusDto> findAll();
 
-    List<Bus> findAllByAgency(Agency agency);
+    List<Bus> findAllByAgency(Long agency);
 
     Bus findById(Long id);
 

@@ -22,6 +22,8 @@ public interface TripService {
 
     List<Trip> findAllByDestStop(Stop destStop);
 
+    List<Trip> findAllBySourceStopAndDestStop(Stop source, Stop dest);
+
     Trip findById(Long id);
 
     Trip save(TripDto tripDto);

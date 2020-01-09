@@ -72,6 +72,11 @@ public class ClientRestController {
         return tripScheduleService.findAll();
     }
 
+    @GetMapping("/allViewTrip")
+    public List<TripViewDto> findAllViewTrip() {
+        return tripScheduleService.findAllToView();
+    }
+
 //-----------------------Save-element-------------------------------------------------------------------
 
     @Transactional
@@ -164,19 +169,49 @@ public class ClientRestController {
         return tripScheduleService.deleteById(id);
     }
 //TODO
+    //-----------------------Find-agency---------------------------------------------------------------------
+    @GetMapping("/findAgency")
+    public AgencyDto findAgency(@RequestParam("agencyId") Long agencyId){
+        return agencyService.findDtoById(agencyId);
+    }
     //-----------------------Find-by-agency------------------------------------------------------------------
     //----------Trip-Schedule--------------------------------------------------------------------------------
-    @GetMapping("/findByAgency")
-    public List<TripSchedule> findByAgency(@RequestParam("id") Long id){
+    @GetMapping("/findTripsByAgency")
+    public List<TripSchedule> findByAgency(@RequestParam("agencyId") Long id){
         return tripScheduleService.findAllByAgency(id);
     }
+    //---------Buses-----------------------------------------------------------------------------------------
+    @GetMapping("/findBusesByAgency")
+    public List<Bus> findByBus(@RequestParam("Id") Long id){
+        return busService.findAllByAgency(id);
+    }
     //-----------------------Find-trips-by-stops-------------------------------------------------------------
-
-    //-----------------------Find-trips-^--------------------------------------------------------------------
+    @GetMapping("/searchTripsSchedules")
+    public List<TripSchedule> findByStops(@RequestParam("source") Long source, @RequestParam("dest") Long dest){
+        return tripScheduleService.findAllByStops(source, dest);
+    }
+    //-----------------------Find-trips-date-----------------------------------------------------------------
 
     //-----------------------Find-by-agency-bus/trip---------------------------------------------------------
-
+    @GetMapping("/agencyByBus")
+    public Agency findAgencyByBus(@RequestParam("busId") Long id){
+        return agencyService.findByBus(id);
+    }
     //-----------------------Book-ticket---------------------------------------------------------------------
-
+    @PostMapping("/bookTicket")
+    public Ticket bookTicket(@RequestParam("tripScheduleId") Long id, @RequestBody Long userId){
+        TripSchedule tripSchedule = tripScheduleService.findById(id);
+        if (tripSchedule.getAvailableSeats() <= 0){
+            return null;
+        }
+        TicketDto ticketDto = new TicketDto();
+        ticketDto.setPassengerId(userId);
+        ticketDto.setTripScheduleId(id);
+        ticketDto.setJourneyDate(tripSchedule.getTripDate());
+        ticketDto.setCancellable(true);
+        ticketDto.setSeatNumber(tripSchedule.getAvailableSeats());
+        tripSchedule.setAvailableSeats(tripSchedule.getAvailableSeats() - 1);
+        return saveTicket(ticketDto);
+    }
 
 }

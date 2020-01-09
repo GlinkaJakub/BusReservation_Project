@@ -1,16 +1,9 @@
 package com.glinka.mtab.controller;
 
-import com.glinka.mtab.dto.RoleDto;
-import com.glinka.mtab.dto.UserDto;
 import com.glinka.mtab.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class ClientViewController {
@@ -35,21 +28,33 @@ public class ClientViewController {
         this.tripScheduleService = tripScheduleService;
     }
 
-    @GetMapping("/hello")
-    public String hello(Model model){
-        model.addAttribute("date", new java.util.Date());
 
-        return "hello";
+
+    @GetMapping("/profile-1.html")
+    public String viewProfile(){
+        return "profile-1";
     }
 
-//    @PostMapping("/login")
-//    public String loginUser(@RequestBody UserDto user){
+    @GetMapping("/table.html")
+    public String viewTrips(Model model){
+        model.addAttribute("trips", tripScheduleService.findAllToView());
+        return "table";
+    }
+
+//    @GetMapping("/hello")
+//    public String hello(Model model){
+//        model.addAttribute("date", new java.util.Date());
+//        return "hello";
+//    }
+//
+//    @GetMapping("/login.html")
+//    public String loginUser(Model model){
 //        return "login";
 //    }
 //
-//    @PostMapping("/signup")
-//    public String signup(@RequestBody UserDto user){
-//        return "signup";
+//    @GetMapping("/register.html")
+//    public String signup(Model model){
+//        return "register";
 //    }
 
 //    @GetMapping("/trips")
@@ -61,7 +66,7 @@ public class ClientViewController {
 //    public String bookTicket(@RequestParam("ticketId") Long id){
 //        return "book";
 //    }
-//
+
 
 
 }
