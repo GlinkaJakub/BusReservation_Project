@@ -81,49 +81,51 @@ public class ClientRestController {
 
     @Transactional
     @PostMapping("/saveRole")
-    public Role addRole(@RequestBody RoleDto roleDto){
+    public Role addRole(@ModelAttribute("role") RoleDto roleDto){
         return roleService.save(roleDto);
     }
 
     @Transactional
     @PostMapping("/saveUser")
-    public User saveClient(@RequestBody UserDto userDto){
+    public User saveClient(@ModelAttribute("user") UserDto userDto){
+        userDto.setRoleId(5L);
         return userService.save(userDto);
     }
 
     @Transactional
     @PostMapping("/saveAgency")
-    public Agency saveAgency(@RequestBody AgencyDto agencyDto) {
+    public Agency saveAgency(@ModelAttribute("agency") AgencyDto agencyDto) {
         return agencyService.save(agencyDto);
     }
 
     @Transactional
     @PostMapping("/saveBus")
-    public Bus saveBus(@RequestBody BusDto busDto) {
+    public Bus saveBus(@ModelAttribute("bus") BusDto busDto) {
         return busService.save(busDto);
     }
 
     @Transactional
     @PostMapping("/saveStop")
-    public Stop saveStop(@RequestBody StopDto stopDto) {
+    public Stop saveStop(@ModelAttribute("stop") StopDto stopDto) {
         return stopService.save(stopDto);
     }
 
     @Transactional
     @PostMapping("/saveTicket")
-    public Ticket saveTicket(@RequestBody TicketDto ticketDto) {
+    public Ticket saveTicket(@ModelAttribute("ticket") TicketDto ticketDto) {
         return ticketService.save(ticketDto);
     }
 
     @Transactional
     @PostMapping("/saveTrip")
-    public Trip saveTrip(@RequestBody TripDto tripDto) {
+    public Trip saveTrip(@ModelAttribute("newTrip") TripDto tripDto) {
+        tripDto.setAgencyId(9L);
         return tripService.save(tripDto);
     }
 
     @Transactional
     @PostMapping("/saveTripSchedule")
-    public TripSchedule saveTripSchedule(@RequestBody TripScheduleDto tripScheduleDto) {
+    public TripSchedule saveTripSchedule(@ModelAttribute("tripSchedule") TripScheduleDto tripScheduleDto) {
         return tripScheduleService.save(tripScheduleDto);
     }
 
@@ -168,7 +170,7 @@ public class ClientRestController {
     public boolean deleteTripSchedule(@RequestParam("id") Long id){
         return tripScheduleService.deleteById(id);
     }
-//TODO
+
     //-----------------------Find-agency---------------------------------------------------------------------
     @GetMapping("/findAgency")
     public AgencyDto findAgency(@RequestParam("agencyId") Long agencyId){
@@ -213,5 +215,4 @@ public class ClientRestController {
         tripSchedule.setAvailableSeats(tripSchedule.getAvailableSeats() - 1);
         return saveTicket(ticketDto);
     }
-
 }

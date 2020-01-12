@@ -35,8 +35,11 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                        role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                        <form name="logout" th:action="@{/logout}" method="post">
+                                            <input class="dropdown-item" type="submit" value="Logout">
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -66,85 +69,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>A0001</td>
-                                                            <td>Tokyo</td>
-                                                            <td>London</td>
-                                                            <td>120</td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>A0002</td>
-                                                            <td>London</td>
-                                                            <td>Tokyo</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>A0003</td>
-                                                            <td>San Francisco</td>
-                                                            <td>London</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>A0004</td>
-                                                            <td>London</td>
-                                                            <td>San Francisco</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>A0005</td>
-                                                            <td>San Francisco</td>
-                                                            <td>New York</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>A0006</td>
-                                                            <td>New York</td>
-                                                            <td>London</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7<br></td>
-                                                            <td>A0007</td>
-                                                            <td>London</td>
-                                                            <td>New York</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8</td>
-                                                            <td>A0008</td>
-                                                            <td>New York</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9</td>
-                                                            <td>A0009</td>
-                                                            <td>New York</td>
-                                                            <td>San Francisco</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10</td>
-                                                            <td>A0010</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>Tokyo</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
+                                                        <tr th:each="trip : ${trips}">
+                                                            <td th:text="${trip.id}"></td>
+                                                            <td th:text="${trip.busId}"></td>
+                                                            <td th:text="${trip.sourceStopId}"></td>
+                                                            <td th:text="${trip.destStopId}"></td>
+                                                            <td th:text="${trip.journeyTime}"></td>
+                                                            <td th:text="${trip.fare}"></td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
@@ -173,94 +104,73 @@
                                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                                 <table class="table dataTable my-0" id="dataTable">
                                                     <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Trip ID</th>
-                                                            <th>Date</th>
-                                                            <th>Available Seats</th>
-                                                            <th>Sold Ticket</th>
-                                                        </tr>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Trip ID</th>
+                                                        <th>Date</th>
+                                                        <th>Available Seats</th>
+                                                        <!--                                                            <th>Sold Ticket</th>-->
+                                                    </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>A0001</td>
-                                                            <td>Tokyo</td>
-                                                            <td>120</td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>A0002</td>
-                                                            <td>London</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>A0003</td>
-                                                            <td>San Francisco</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>A0004</td>
-                                                            <td>London</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>A0005</td>
-                                                            <td>San Francisco</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>A0006</td>
-                                                            <td>New York</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7<br></td>
-                                                            <td>A0007</td>
-                                                            <td>London</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8</td>
-                                                            <td>A0008</td>
-                                                            <td>New York</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9</td>
-                                                            <td>A0009</td>
-                                                            <td>New York</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10</td>
-                                                            <td>A0010</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>120<br></td>
-                                                            <td>300</td>
-                                                        </tr>
+                                                    <tr th:each="tripSchedule : ${tripSchedules}">
+                                                        <td th:text="${tripSchedule.id}"></td>
+                                                        <td th:text="${tripSchedule.tripDetailsId}"></td>
+                                                        <td th:text="${tripSchedule.tripDate}"></td>
+                                                        <td th:text="${tripSchedule.availableSeats}"></td>
+                                                        <!--                                                            <td th:text="${tripSchedule.busId}"></td>-->
+                                                    </tr>
                                                     </tbody>
                                                     <tfoot>
-                                                        <tr>
-                                                            <td><strong>ID</strong></td>
-                                                            <td><strong>Bus Code</strong></td>
-                                                            <td><strong>Source Stop</strong></td>
-                                                            <td><strong>Duration</strong></td>
-                                                            <td><strong>Fare</strong></td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td><strong>ID</strong></td>
+                                                        <td><strong>Trip ID</strong></td>
+                                                        <td><strong>Date</strong></td>
+                                                        <td><strong>Available Seats</strong></td>
+                                                        <!--                                                            <td><strong>Fare</strong></td>-->
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col" style="padding: 12px;">
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Stops Info</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table dataTable my-0" id="dataTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Code</th>
+                                                        <th>Stop Name</th>
+                                                        <th>Details</th>
+                                                        <!--                                                            <th>Sold Ticket</th>-->
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="stop : ${stops}">
+                                                        <td th:text="${stop.id}"></td>
+                                                        <td th:text="${stop.code}"></td>
+                                                        <td th:text="${stop.name}"></td>
+                                                        <td th:text="${stop.details}"></td>
+                                                        <!--                                                            <td th:text="${tripSchedule.busId}"></td>-->
+                                                    </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <td><strong>ID</strong></td>
+                                                        <td><strong>Code</strong></td>
+                                                        <td><strong>Stop Name</strong></td>
+                                                        <td><strong>Details</strong></td>
+                                                        <!--                                                            <td><strong>Fare</strong></td>-->
+                                                    </tr>
                                                     </tfoot>
                                                 </table>
                                             </div>
@@ -277,60 +187,108 @@
                                             <p class="text-primary m-0 font-weight-bold">Add Trip</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
-                                                <div class="form-group"><select class="form-control" name="trip-bus"><optgroup label="Buses"><option value="1" selected="">A0001</option><option value="2">A0002</option><option value="3">A0003</option></optgroup></select></div>
-                                                <div
-                                                    class="form-group"><select class="form-control" name="trip-source"><optgroup label="Source Stop"><option value="1" selected="">London</option><option value="2">New York</option><option value="2">Tokio</option></optgroup></select></div>
-                                        <div
-                                            class="form-group"><select class="form-control" name="trip-dest"><optgroup label="Destination Stop"><option value="1" selected="">London</option><option value="2">New York</option><option value="2">Tokio</option></optgroup></select></div>
-                                    <div
-                                        class="form-group"><input class="form-control" type="text" name="trip-duration" placeholder="Trip Duration (min)"></div>
-                                <div class="form-group"><input class="form-control" type="text" name="trip-fare" placeholder="Fare (km)"></div><button class="btn btn-primary" type="button">Save</button></form>
+                                            <form action="#" th:action="@{/client/saveTrip}"
+                                                  th:object="${newTrip}" method="POST">
+                                                <input type="hidden" th:field="*{agencyId}" th:value="9"/>
+                                                <div class="form-group">
+                                                    <select th:field="*{busId}" class="form-control" name="trip-bus">
+                                                        <optgroup label="Buses">
+                                                            <option th:each="bus : ${buses}" th:value="${bus.id}" th:text="${bus.code}">Bus</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select th:field="*{sourceStopId}" class="form-control" name="trip-source">
+                                                        <optgroup label="Source Stop">
+                                                            <option th:each="sourceStop : ${stops}" th:value="${sourceStop.id}" th:text="${sourceStop.name}">London</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select th:field="*{destStopId}" class="form-control" name="trip-dest">
+                                                        <optgroup label="Destination Stop">
+                                                            <option th:each="destStop : ${stops}" th:value="${destStop.id}" th:text="${destStop.name}">London</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input th:field="*{journeyTime}" class="form-control" type="text" name="trip-duration" placeholder="Trip Duration (min)">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input th:field="*{fare}" class="form-control" type="text" name="trip-fare" placeholder="Fare (km)">
+                                                </div>
+                                                <button class="btn btn-primary" type="submit">Save</button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="padding: 12px;">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">Add Trip Schedule</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="#" th:action="@{/client/saveTripSchedule}"
+                                               th:object="${newTripSchedule}" method="POST">
+                                            <div class="form-group">
+                                                <select th:field="*{tripDetailsId}" class="form-control" name="trip-bus">
+                                                    <optgroup label="Trip">
+                                                        <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.sourceStopId + ' - ' + trip.destStopId}">Tokyo - London</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input th:field="*{availableSeats}" class="form-control" type="text" name="available-seats" placeholder="Available Seats">
+                                            </div>
+                                            <div class="form-group">
+                                                <input th:field="*{tripDate}" class="form-control" type="date">
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save</button>
+                                        </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="padding: 12px;">
-                        <div class="card shadow">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 font-weight-bold">Add Trip Schedule</p>
+                    <div class="row">
+                        <div class="col" style="padding: 12px;">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 font-weight-bold">Add Stop</p>
+                                </div>
+                                <div class="card-body">
+                                    <form action="#" th:action="@{/client/saveStop}"
+                                          th:object="${newStop}" method="POST">
+                                        <div class="form-group">
+                                            <input th:field="*{code}" class="form-control" type="text" name="stop-code" placeholder="Stop Code">
+                                        </div>
+                                        <div class="form-group">
+                                            <input th:field="*{name}" class="form-control" type="text" name="stop-name" placeholder="Stop Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input th:field="*{details}" class="form-control" type="text" name="stop-details" placeholder="Stop Details">
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group"><select class="form-control" name="trip-bus"><optgroup label="Trip"><option value="1" selected="">Tolyo - Londyn</option><option value="2">London - Tokio</option><option value="3">San Francisco - New York</option></optgroup></select></div>
-                                    <div
-                                        class="form-group"><input class="form-control" type="text" name="available-seats" placeholder="Available Seats"></div>
-                            <div class="form-group"><input class="form-control" type="date"></div><button class="btn btn-primary" type="button">Save</button></form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" style="padding: 12px;">
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Add Stop</p>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group"><input class="form-control" type="text" name="stop-code" placeholder="Stop Code"></div>
-                                <div class="form-group"><input class="form-control" type="text" name="stop-name" placeholder="Stop Name"></div>
-                                <div class="form-group"><input class="form-control" type="text" name="stop-details" placeholder="Stop Details"></div><button class="btn btn-primary" type="button">Save</button></form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <footer class="bg-white sticky-footer">
         <div class="container my-auto">
             <div class="text-center my-auto copyright"><span>Copyright © Brand 2019</span></div>
         </div>
     </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>

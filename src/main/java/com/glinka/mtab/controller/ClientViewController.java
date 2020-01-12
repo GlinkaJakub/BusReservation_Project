@@ -1,9 +1,12 @@
 package com.glinka.mtab.controller;
 
+import com.glinka.mtab.dto.UserDto;
+import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ClientViewController {
@@ -28,10 +31,9 @@ public class ClientViewController {
         this.tripScheduleService = tripScheduleService;
     }
 
-
-
     @GetMapping("/profile-1.html")
-    public String viewProfile(){
+    public String viewProfile(Model model, @RequestParam("id") Long id){
+        model.addAttribute("user", userService.findByIdDto(id));
         return "profile-1";
     }
 

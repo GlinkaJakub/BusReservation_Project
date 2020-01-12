@@ -102,6 +102,21 @@ public class TripScheduleServiceImpl implements TripScheduleService {
     }
 
     @Override
+    public List<TripScheduleDto> findAllDtoByAgency(Long agencyId) {
+        Agency agency = agencyRepository.findById(agencyId).orElse(null);
+        if (agency == null) {
+            return null;
+        }
+        List<Trip> trips = tripRepository.findAllByAgency(agency);
+        List<TripSchedule> tripScheduleList = new ArrayList<>();
+        for (Trip trip : trips) {
+            tripScheduleRepository.findAllByTripDetails(trip);
+            tripScheduleList.addAll(findAllByTripDetails(trip));
+        }
+        return tripScheduleDtoToEntityConverter.convertToList(tripScheduleList);
+    }
+
+    @Override
     public List<TripSchedule> findAllByStops(Long sourceId, Long destId) {
         Stop source = stopRepository.findById(sourceId).orElse(null);
         Stop dest = stopRepository.findById(destId).orElse(null);

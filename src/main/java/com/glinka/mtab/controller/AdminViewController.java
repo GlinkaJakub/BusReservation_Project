@@ -1,11 +1,14 @@
 package com.glinka.mtab.controller;
 
-import com.glinka.mtab.dto.UserDto;
+import com.glinka.mtab.dto.*;
+import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.service.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminViewController {
@@ -30,9 +33,16 @@ public class AdminViewController {
         this.tripScheduleService = tripScheduleService;
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestBody UserDto user){
+    @GetMapping("/login.html")
+    public String loginUser(){
         return "login";
+    }
+
+    @GetMapping("/register.html")
+    public String registerUser(Model model){
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "register";
     }
 //
 //    @PostMapping("/signup")
@@ -47,30 +57,55 @@ public class AdminViewController {
 //
 //        model.addAttribute("agency", agencyDto);
 //        return "agency";
+
 //    }
-
-    @GetMapping("/agency.html")
-    public String viewAgency(){
-        return "agency";
-    }
-
-    @GetMapping("/buses.html")
-    public String viewBuses(){
-        return "buses";
-    }
 
     @GetMapping("/index.html")
     public String viewBoard(){
         return "index";
     }
 
+    @GetMapping("/agency.html")
+    public String viewAgency(Model model, @RequestParam("id") Long id){
+        AgencyDto agencyDto = agencyService.findDtoById(id);
+        UserDto userDto = userService.findByIdDto(agencyDto.getOwner());
+        model.addAttribute("agency", agencyDto);
+        model.addAttribute("user", userDto);
+        return "agency";
+    }
+
+    @GetMapping("/buses.html")
+    public String viewBuses(Model model, @RequestParam("id") Long id){
+        AgencyDto agencyDto = agencyService.findDtoById(id);
+        UserDto userDto = userService.findByIdDto(agencyDto.getOwner());
+        BusDto busDto = new BusDto();
+        model.addAttribute("newBus", busDto);
+        model.addAttribute("user", userDto);
+        model.addAttribute("buses", busService.findAllByAgency(id));
+        return "buses";
+    }
+
     @GetMapping("/trips.html")
-    public String viewTrips(){
+    public String viewTrips(Model model, @RequestParam("id") Long id){
+        AgencyDto agencyDto = agencyService.findDtoById(id);
+        UserDto userDto = userService.findByIdDto(id);
+        TripDto tripDto = new TripDto();
+        TripScheduleDto tripScheduleDto = new TripScheduleDto();
+        StopDto stopDto = new StopDto();
+        model.addAttribute("newTrip", tripDto);
+        model.addAttribute("newTripSchedule", tripScheduleDto);
+        model.addAttribute("newStop", stopDto);
+        model.addAttribute("user", userDto);
+        model.addAttribute("buses", busService.findAllByAgency(id));
+        model.addAttribute("trips", tripService.findAllDtoByAgency(id));
+        model.addAttribute("tripSchedules", tripScheduleService.findAllDtoByAgency(id));
+        model.addAttribute("stops", stopService.findAll());
         return "trips";
     }
 
     @GetMapping("/profile.html")
-    public String viewProfile(){
+    public String viewProfile(Model model, @RequestParam("id") Long id){
+        model.addAttribute("user", userService.findByIdDto(id));
         return "profile";
     }
 //

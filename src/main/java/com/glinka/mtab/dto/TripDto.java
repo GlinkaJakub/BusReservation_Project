@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class TripDto {
 
-    private long id;
+    private Long id;
     private int fare;
     private String journeyTime;
     private Long sourceStopId;

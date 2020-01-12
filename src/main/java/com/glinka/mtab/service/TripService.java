@@ -14,6 +14,8 @@ public interface TripService {
 
     List<Trip> findAllByAgency(Agency agency);
 
+    List<TripDto> findAllDtoByAgency(Long id);
+
     List<Trip> findAllByBus(Bus bus);
 
     List<Trip> findAllByStops(Stop sourceStop, Stop destStop);

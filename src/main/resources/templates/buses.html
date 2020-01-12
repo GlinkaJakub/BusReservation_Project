@@ -44,8 +44,11 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                        role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                        <form name="logout" th:action="@{/logout}" method="post">
+                                            <input class="dropdown-item" type="submit" value="Logout">
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -60,11 +63,6 @@
                                     <p class="text-primary m-0 font-weight-bold">Buses Info</p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 col-xl-12">
-                                            <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                                        </div>
-                                    </div>
                                     <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                         <table class="table dataTable my-0" id="dataTable">
                                             <thead>
@@ -76,56 +74,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>A0001</td>
-                                                    <td>50</td>
-                                                    <td>Mercedes</td>
+                                                <tr th:each="bus : ${buses}">
+                                                    <td th:text="${bus.id}"></td>
+                                                    <td th:text="${bus.code}"></td>
+                                                    <td th:text="${bus.capacity}"></td>
+                                                    <td th:text="${bus.make}"></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>A0002</td>
-                                                    <td>50</td>
-                                                    <td>MAN</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>A0003</td>
-                                                    <td>20</td>
-                                                    <td>Renault</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>A0004</td>
-                                                    <td>26</td>
-                                                    <td>Solaris</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>A0005</td>
-                                                    <td>52</td>
-                                                    <td>MAN</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>A0006</td>
-                                                    <td>50</td>
-                                                    <td>Renault</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7<br></td>
-                                                    <td>A0007</td>
-                                                    <td>50</td>
-                                                    <td>Solaris</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8</td>
-                                                    <td>A0008</td>
-                                                    <td>20</td>
-                                                    <td>Mercedes</td>
-                                                </tr>
-                                                <tr></tr>
-                                                <tr></tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -146,10 +100,19 @@
                                     <p class="text-primary m-0 font-weight-bold">Add bus</p>
                                 </div>
                                 <div class="card-body">
-                                    <form>
-                                        <div class="form-group"><input class="form-control" type="text" placeholder="Bus Code" name="bus-code"></div>
-                                        <div class="form-group"><input class="form-control" type="text" name="bus-capacity" placeholder="Capacity"></div>
-                                        <div class="form-group"><input class="form-control" type="text" name="bus-description" placeholder="Description"></div><button class="btn btn-primary" type="button">Save</button></form>
+                                    <form action="#" th:action="@{/saveBus}"
+                                          th:object="${newBus}" method="POST">
+                                        <div class="form-group">
+                                            <input th:field="*{code}" class="form-control" type="text" placeholder="Bus Code" name="bus-code">
+                                        </div>
+                                        <div class="form-group">
+                                            <input th:field="*{capacity}" class="form-control" type="text" name="bus-capacity" placeholder="Capacity">
+                                        </div>
+                                        <div class="form-group">
+                                            <input th:field="*{make}" class="form-control" type="text" name="bus-description" placeholder="Description">
+                                        </div>
+                                        <button class="btn btn-primary" type="button">Save</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -23,6 +23,8 @@ public interface TripScheduleService {
 
     List<TripSchedule> findAllByAgency(Long agencyId);
 
+    List<TripScheduleDto> findAllDtoByAgency(Long agencyId);
+
     List<TripSchedule> findAllByStops(Long sourceId, Long destId);
 
     TripSchedule findById(Long id);

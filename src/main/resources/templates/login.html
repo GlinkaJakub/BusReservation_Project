@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css?h=d5363b5d8e5c0290c7d47fb1e16022c4}">
     <!--    <link rel="stylesheet" href="css/bootstrap.min.css"-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 
 <body class="bg-gradient-primary">
@@ -30,9 +30,22 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4">Welcome!</h4>
                                     </div>
-                                    <form class="user">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Login" name="login"></div>
-                                        <div class="form-group"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
+<!--                                    <form class="user">-->
+                                    <form class="user" action="${pageContext.request.contextPath}/authenticate" th:action="@{/authenticate}" method="POST">
+<!--                                          th:object="${user}"-->
+                                        <span th:if="${param.error != null}">
+                                            <i>Sorry! Wrong login or password!</i>
+                                        </span>
+                                        <span th:if="${param.logout != null}">
+                                            <i>You have been logout!</i>
+                                        </span>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="text" id="exampleInputLogin" aria-describedby="emailHelp" placeholder="Login" name="username">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password">
+                                        </div>
+                                        <button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
                                         <hr>
                                     </form>
                                     <div class="text-center"><a class="small" href="/register.html">Create an Account!</a></div>

@@ -44,9 +44,15 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                        role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                    <span class="d-none d-lg-inline mr-2 text-gray-600 small"  th:text="${user.firstName}">Valerie</span>
+                                    <span class="d-none d-lg-inline mr-2 text-gray-600 small"  th:text="${user.lastName}">Luna</span>
+                                </a>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                        <form name="logout" th:action="@{/logout}" method="post">
+                                            <input class="dropdown-item" type="submit" value="Logout">
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -93,20 +99,36 @@
                                             <p class="text-primary m-0 font-weight-bold">Agency</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form action="#" th:action="@{/saveAgency}"
+                                                  th:object="${agency}" method="POST">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="agency-code"><strong>Agency Code</strong></label><input class="form-control" type="text" name="agency-code"></div>
+                                                        <div class="form-group">
+                                                            <label for="agency-code">
+                                                                <strong>Agency Code</strong>
+                                                            </label>
+                                                            <input th:field="*{code}" class="form-control" type="text" name="agency-code">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="agency-name"><strong>Agency Name</strong></label><input class="form-control" type="text" name="agency-name"></div>
+                                                        <div class="form-group">
+                                                            <label for="agency-name">
+                                                                <strong>Agency Name</strong>
+                                                            </label>
+                                                            <input th:field="*{name}" class="form-control" type="text" name="agency-name">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="agency-details"><strong>Agency Details</strong></label><input class="form-control" type="text" name="agency-details"></div>
+                                                        <div class="form-group">
+                                                            <label for="agency-details">
+                                                                <strong>Agency Details</strong>
+                                                            </label>
+                                                            <input th:field="*{details}" class="form-control" type="text" name="agency-details">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>

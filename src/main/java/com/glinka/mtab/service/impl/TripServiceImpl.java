@@ -3,6 +3,7 @@ package com.glinka.mtab.service.impl;
 import com.glinka.mtab.converter.Converter;
 import com.glinka.mtab.dto.TripDto;
 import com.glinka.mtab.model.entity.*;
+import com.glinka.mtab.repository.AgencyRepository;
 import com.glinka.mtab.repository.TripRepository;
 import com.glinka.mtab.service.TripService;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,15 @@ import java.util.List;
 public class TripServiceImpl implements TripService {
 
     private final TripRepository tripRepository;
+    private final AgencyRepository agencyRepository;
 
     private final Converter<TripDto, Trip> tripDtoToEntityConverter;
     private final Converter<Trip, TripDto> tripEntityToDtoConverter;
 
 
-    public TripServiceImpl(TripRepository tripRepository, Converter<TripDto, Trip> tripDtoToEntityConverter, Converter<Trip, TripDto> tripEntityToDtoConverter) {
+    public TripServiceImpl(TripRepository tripRepository, AgencyRepository agencyRepository, Converter<TripDto, Trip> tripDtoToEntityConverter, Converter<Trip, TripDto> tripEntityToDtoConverter) {
         this.tripRepository = tripRepository;
+        this.agencyRepository = agencyRepository;
         this.tripDtoToEntityConverter = tripDtoToEntityConverter;
         this.tripEntityToDtoConverter = tripEntityToDtoConverter;
     }
@@ -34,6 +37,16 @@ public class TripServiceImpl implements TripService {
     @Override
     public List<Trip> findAllByAgency(Agency agency) {
         return tripRepository.findAllByAgency(agency);
+    }
+
+    @Override
+    public List<TripDto> findAllDtoByAgency(Long id) {
+        Agency agency = agencyRepository.findById(id).orElse(null);
+        if (agency == null)
+            return null;
+        return tripDtoToEntityConverter.convertToList(
+                tripRepository.findAllByAgency(agency)
+        );
     }
 
     @Override
