@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class TicketDto {
 
-    private long id;
+    private Long id;
     private int seatNumber;
     private Boolean cancellable;
     private String journeyDate;

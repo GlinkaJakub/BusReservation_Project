@@ -21,9 +21,13 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a><a class="nav-link active" href="/agency.html"><i class="fas fa-city"></i><span>Agency</span></a><a class="nav-link" href="/buses.html"><i class="fas fa-bus"></i><span>Buses</span></a>
-                        <a
-                            class="nav-link" href="/trips.html"><i class="fas fa-road"></i><span>Trips</span></a><a class="nav-link" href="/profile.html"><i class="fas fa-user-cog"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+                        <a class="nav-link active" th:href="@{/agency.html}"><i class="fas fa-city"></i><span>Agency</span></a>
+                        <a class="nav-link" th:href="@{/buses.html}"><i class="fas fa-bus"></i><span>Buses</span></a>
+                        <a class="nav-link" th:href="@{/trips.html}"><i class="fas fa-road"></i><span>Trips</span></a>
+                        <a class="nav-link" th:href="@{/profile.html}"><i class="fas fa-user-cog"></i><span>Profile</span></a>
+                    </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -102,12 +106,14 @@
                                             <form action="#" th:action="@{/saveAgency}"
                                                   th:object="${agency}" method="POST">
                                                 <div class="form-row">
+                                                    <input type="hidden" th:field="*{id}"/>
+                                                    <input type="hidden" th:field="*{owner}"/>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="agency-code">
                                                                 <strong>Agency Code</strong>
                                                             </label>
-                                                            <input th:field="*{code}" class="form-control" type="text" name="agency-code">
+                                                            <input th:field="*{code}" class="form-control" type="text" name="agency-code" id="agency-code">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,7 +123,7 @@
                                                             <label for="agency-name">
                                                                 <strong>Agency Name</strong>
                                                             </label>
-                                                            <input th:field="*{name}" class="form-control" type="text" name="agency-name">
+                                                            <input th:field="*{name}" class="form-control" type="text" name="agency-name" id="agency-name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,7 +133,7 @@
                                                             <label for="agency-details">
                                                                 <strong>Agency Details</strong>
                                                             </label>
-                                                            <input th:field="*{details}" class="form-control" type="text" name="agency-details">
+                                                            <input th:field="*{details}" class="form-control" type="text" name="agency-details" id="agency-details">
                                                         </div>
                                                     </div>
                                                 </div>

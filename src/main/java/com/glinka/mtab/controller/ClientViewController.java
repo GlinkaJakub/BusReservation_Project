@@ -1,12 +1,20 @@
 package com.glinka.mtab.controller;
 
+import com.glinka.mtab.dto.TicketDto;
 import com.glinka.mtab.dto.UserDto;
+import com.glinka.mtab.model.entity.Ticket;
+import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.service.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.transaction.Transactional;
 
 @Controller
 public class ClientViewController {
@@ -32,43 +40,63 @@ public class ClientViewController {
     }
 
     @GetMapping("/profile-1.html")
-    public String viewProfile(Model model, @RequestParam("id") Long id){
-        model.addAttribute("user", userService.findByIdDto(id));
+    public String viewProfile(Model model, Authentication authentication){
+        String login = authentication.getName();
+        Long userId = userService.findByLogin(login).getId();
+        model.addAttribute("userName", login);
+        model.addAttribute("userId", userId);
+        model.addAttribute("user", userService.findByIdDto(userId));
         return "profile-1";
     }
 
     @GetMapping("/table.html")
-    public String viewTrips(Model model){
+    public String viewTrips(Model model, Authentication authentication){
+//        System.out.println(authentication.getName());
+        String login = authentication.getName();
+        Long userId = userService.findByLogin(login).getId();
+        model.addAttribute("userName", login);
+        model.addAttribute("userId", userId);
+        model.addAttribute("user", userService.findByIdDto(userId));
         model.addAttribute("trips", tripScheduleService.findAllToView());
         return "table";
     }
 
-//    @GetMapping("/hello")
-//    public String hello(Model model){
-//        model.addAttribute("date", new java.util.Date());
-//        return "hello";
-//    }
-//
-//    @GetMapping("/login.html")
-//    public String loginUser(Model model){
-//        return "login";
-//    }
-//
-//    @GetMapping("/register.html")
-//    public String signup(Model model){
-//        return "register";
-//    }
+    @Transactional
+    @GetMapping("/bookTicket")
+    public String bookTicket(@RequestParam("tripScheduleId") Long id, @RequestParam("userId") Long userId){
+        TripSchedule tripSchedule = tripScheduleService.findById(id);
+        if (tripSchedule.getAvailableSeats() <= 0){
+            return null;
+        }
+        System.out.println("book");
+        TicketDto ticketDto = new TicketDto();
+        ticketDto.setPassengerId(userId);
+        ticketDto.setTripScheduleId(id);
+        ticketDto.setJourneyDate(tripSchedule.getTripDate());
+        ticketDto.setCancellable(true);
+        ticketDto.setSeatNumber(tripSchedule.getAvailableSeats());
+        tripSchedule.setAvailableSeats(tripSchedule.getAvailableSeats() - 1);
+        saveTicket(ticketDto);
+        return "redirect:/table.html";
+    }
 
-//    @GetMapping("/trips")
-//    public String findTrip(@RequestParam("source") String source, @RequestParam("dest") String dest, @RequestParam("date") String date){
-//        return "trips";
-//    }
-//
-//    @GetMapping("/book")
-//    public String bookTicket(@RequestParam("ticketId") Long id){
-//        return "book";
-//    }
+    @Transactional
+//    @PostMapping("/saveTicket")
+    public Ticket saveTicket(@ModelAttribute("ticket") TicketDto ticketDto) {
+        return ticketService.save(ticketDto);
+    }
 
+    @Transactional
+    @PostMapping("/saveUser")
+    public String saveClient(@ModelAttribute("user") UserDto userDto, Authentication authentication){
+        String login = authentication.getName();
+        Long userId = userService.findByLogin(login).getId();
 
+        if (userDto.getRoleId() != null)
+            userDto.setRoleId(5L);
+        userDto.setId(userId);
+        userService.save(userDto);
+        return "redirect:/profile-1.html";
+    }
 
 }

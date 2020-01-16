@@ -12,6 +12,7 @@ public class UserDtoToEntityConverter extends ConverterAdapter<User, UserDto> {
 
     private final RoleService roleService;
 
+
     public UserDtoToEntityConverter(RoleService roleService) {
         this.roleService = roleService;
     }
@@ -21,6 +22,8 @@ public class UserDtoToEntityConverter extends ConverterAdapter<User, UserDto> {
         if(target == null || source == null){
             return null;
         }
+        if (source.getId() != null)
+            target.setId(source.getId());
 
         target.setLogin(source.getLogin());
         target.setEmail(source.getEmail());

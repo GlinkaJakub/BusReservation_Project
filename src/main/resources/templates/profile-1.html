@@ -20,7 +20,8 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/table.html"><i class="fas fa-road"></i><span>Trips</span></a><a class="nav-link active" href="/profile-1.html"><i class="fas fa-user-cog"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/table.html"><i class="fas fa-road"></i><span>Trips</span></a>
+                        <a class="nav-link active" th:href="@{/profile-1.html}"><i class="fas fa-user-cog"></i><span>Profile</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -107,7 +108,7 @@
                                                             <label for="username">
                                                                 <strong>Username</strong>
                                                             </label>
-                                                            <input th:field="*{login}" class="form-control" type="text" placeholder="user.name" name="username">
+                                                            <input th:field="*{login}" class="form-control" type="text" placeholder="user.name" name="username" id="username">
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -115,30 +116,27 @@
                                                             <label for="email">
                                                                 <strong>Email Address</strong>
                                                             </label>
-                                                            <input th:field="*{email}" class="form-control" type="email" placeholder="user@example.com" name="email">
+                                                            <input th:field="*{email}" class="form-control" type="email" placeholder="user@example.com" name="email" id="email">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <form action="#" th:action="@{/client/saveUser}"
-                                                          th:object="${user}" method="POST">
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label for="first_name">
-                                                                    <strong>First Name</strong>
-                                                                </label>
-                                                                <input th:field="*{firstName}" class="form-control" type="text" placeholder="John" name="first_name">
-                                                            </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="first_name">
+                                                                <strong>First Name</strong>
+                                                            </label>
+                                                            <input th:field="*{firstName}" class="form-control" type="text" placeholder="John" name="first_name" id="first_name">
                                                         </div>
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label for="last_name">
-                                                                    <strong>Last Name</strong>
-                                                                </label>
-                                                                <input th:field="*{lastName}" class="form-control" type="text" placeholder="Doe" name="last_name">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="last_name">
+                                                                <strong>Last Name</strong>
+                                                            </label>
+                                                            <input th:field="*{lastName}" class="form-control" type="text" placeholder="Doe" name="last_name" id="last_name">
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form>

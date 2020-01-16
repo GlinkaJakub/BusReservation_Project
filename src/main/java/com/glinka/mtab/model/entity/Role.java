@@ -2,9 +2,8 @@ package com.glinka.mtab.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -14,6 +13,8 @@ public class Role {
     @GeneratedValue
     private long id;
 
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(128)")
     private String role;
 
 }

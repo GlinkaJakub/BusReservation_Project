@@ -20,7 +20,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/table.html"><i class="fas fa-road"></i><span>Trips</span></a><a class="nav-link" href="/profile-1.html?id=7"><i class="fas fa-user-cog"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="/table.html"><i class="fas fa-road"></i><span>Trips</span></a>
+                        <a class="nav-link" th:href="@{/profile-1.html}"><i class="fas fa-user-cog"></i><span>Profile</span></a>
+                    </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -41,7 +44,11 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small" th:text="${user.firstName}">Valerie</span>
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small" th:text="${user.lastName}">Luna</span>
+                                </a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
                                         <form name="logout" th:action="@{/logout}" method="post">
                                             <input class="dropdown-item" type="submit" value="Logout">
@@ -59,17 +66,6 @@
                             <p class="text-primary m-0 font-weight-bold">Employee Info</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap"><select name="trip-source" style="margin: 10px;"><optgroup label="Source Stop"><option value="1" selected="">London</option><option value="2">New York</option><option value="2">Tokio</option></optgroup></select>
-                                    <select
-                                        name="trip-dest" style="margin: 10px;">
-                                        <optgroup label="Destination Stop">
-                                            <option value="1" selected="">London</option>
-                                            <option value="2">New York</option>
-                                            <option value="2">Tokio</option>
-                                        </optgroup>
-                                        </select><input type="date"></div>
-                            </div>
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table dataTable my-0" id="dataTable">
                                     <thead>
@@ -90,7 +86,7 @@
                                             <td><span th:text="${trip.tripDate}"></span></td>
                                             <td><span th:text="${trip.availableSeats}"></span></td>
                                             <td>
-                                                <button class="btn btn-primary py-0" type="button">Reservation</button>
+                                                <a class="btn btn-primary py-0" th:href="@{/bookTicket(tripScheduleId=${trip.id},userId=${userId})}">Book</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -101,6 +97,7 @@
                                             <td><strong>Destination Stop</strong></td>
                                             <td><strong>Trip Date</strong></td>
                                             <td><strong>Available Seats</strong></td>
+                                            <td></td>
                                         </tr>
                                     </tfoot>
                                 </table>

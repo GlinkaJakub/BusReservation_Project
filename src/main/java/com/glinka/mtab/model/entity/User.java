@@ -35,10 +35,12 @@ public class User {
     @NotNull
     @Column(columnDefinition = "VARCHAR(128)")
     private String lastName;
-
-//    @NotNull
+//
+    @NotNull
     @OneToOne
     @JoinColumn(name = "roleId")
     private Role role;
 
+    @Column(columnDefinition = "INT")
+    private int enable = 1;
 }

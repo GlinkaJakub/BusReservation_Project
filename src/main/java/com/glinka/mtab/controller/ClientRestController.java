@@ -77,8 +77,8 @@ public class ClientRestController {
         return tripScheduleService.findAllToView();
     }
 
-//-----------------------Save-element-------------------------------------------------------------------
 
+//-----------------------Save-element-------------------------------------------------------------------
     @Transactional
     @PostMapping("/saveRole")
     public Role addRole(@ModelAttribute("role") RoleDto roleDto){
@@ -88,7 +88,15 @@ public class ClientRestController {
     @Transactional
     @PostMapping("/saveUser")
     public User saveClient(@ModelAttribute("user") UserDto userDto){
-        userDto.setRoleId(5L);
+        return userService.save(userDto);
+    }
+
+    @Transactional
+    @PostMapping("/newUser")
+    public User newClient(@ModelAttribute("user") UserDto userDto){
+        if (userDto.getRoleId() == null)
+            userDto.setRoleId(5L);
+        userDto.setPassword("{noop}" + userDto.getPassword());
         return userService.save(userDto);
     }
 
@@ -201,7 +209,7 @@ public class ClientRestController {
     }
     //-----------------------Book-ticket---------------------------------------------------------------------
     @PostMapping("/bookTicket")
-    public Ticket bookTicket(@RequestParam("tripScheduleId") Long id, @RequestBody Long userId){
+    public Ticket bookTicket(@RequestParam("tripScheduleId") Long id, @RequestParam("userId") Long userId){
         TripSchedule tripSchedule = tripScheduleService.findById(id);
         if (tripSchedule.getAvailableSeats() <= 0){
             return null;

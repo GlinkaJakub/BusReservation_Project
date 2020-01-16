@@ -20,6 +20,9 @@ public class BusDtoToEntityConverter extends ConverterAdapter<Bus, BusDto> {
         if(target == null || source == null)
             return null;
 
+        if (source.getId() != null)
+            target.setId(source.getId());
+
         target.setCode(source.getCode());
         target.setCapacity(source.getCapacity());
         target.setMake(source.getMake());

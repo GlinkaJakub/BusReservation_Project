@@ -20,6 +20,9 @@ public class AgencyDtoToEntityConverter extends ConverterAdapter<Agency, AgencyD
         if(target == null || source == null)
             return null;
 
+        if (source.getId() != null)
+            target.setId(source.getId());
+
         target.setCode(source.getCode());
         target.setName(source.getName());
         target.setDetails(source.getDetails());

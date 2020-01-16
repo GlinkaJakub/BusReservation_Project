@@ -25,6 +25,9 @@ public class TripScheduleDtoToEntityConverter extends ConverterAdapter<TripSched
         if(target == null || source == null)
             return null;
 
+        if (source.getId() != null)
+            target.setId(source.getId());
+
         target.setTripDate(source.getTripDate());
         target.setAvailableSeats(source.getAvailableSeats());
         target.setTripDetails(tripService.findById(source.getTripDetailsId()));

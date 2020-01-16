@@ -26,6 +26,9 @@ public class TicketDtoToEntityConverter extends ConverterAdapter<Ticket, TicketD
         if(target == null || source == null)
            return null;
 
+        if (source.getId() != null)
+            target.setId(source.getId());
+
         target.setSeatNumber(source.getSeatNumber());
         target.setCancellable(source.getCancellable());
         target.setJourneyDate(source.getJourneyDate());

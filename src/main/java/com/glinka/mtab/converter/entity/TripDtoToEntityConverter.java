@@ -26,6 +26,9 @@ public class TripDtoToEntityConverter extends ConverterAdapter<Trip, TripDto> {
         if (target == null || source == null)
             return null;
 
+        if (source.getId() != null)
+            target.setId(source.getId());
+
         target.setFare(source.getFare());
         target.setJourneyTime(source.getJourneyTime());
         target.setSourceStop(stopService.findById(source.getSourceStopId()));

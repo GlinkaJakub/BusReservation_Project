@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class StopDto {
 
-    private long id;
+    private Long id;
     private String code;
     private String name;
     private String details;

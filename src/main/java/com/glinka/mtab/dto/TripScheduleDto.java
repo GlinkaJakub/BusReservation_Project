@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class TripScheduleDto {
 
-    private long id;
+    private Long id;
     private String tripDate;
     private int availableSeats;
     private Long tripDetailsId;
