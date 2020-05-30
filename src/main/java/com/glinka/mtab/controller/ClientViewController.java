@@ -7,6 +7,7 @@ import com.glinka.mtab.model.entity.TripSchedule;
 import com.glinka.mtab.model.entity.User;
 import com.glinka.mtab.service.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,6 +95,8 @@ public class ClientViewController {
 
         if (userDto.getRoleId() != null)
             userDto.setRoleId(5L);
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        System.out.println(bcrypt.encode(userDto.getPassword()));
         userDto.setId(userId);
         userService.save(userDto);
         return "redirect:/profile-1.html";

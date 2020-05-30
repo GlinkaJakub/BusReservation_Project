@@ -18,9 +18,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String DEF_USERS_BY_USERNAME_QUERY = "select login, password, enable " + "from user " + "where login = ?";
     public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY = "select u.login, r.role from user u, role r where u.login = ? and u.role_Id = r.id";
-    public static final String DEF_GROUP_AUTHORITIES_BY_USERNAME_QUERY = "select g.id, g.group_name, ga.authority " +
-            "from groups g, group_members gm, group_authorities ga " +
-            "where gm.username = ? " + "and g.id = ga.group_id " + "and g.id = gm.group_id";
+//    public static final String DEF_GROUP_AUTHORITIES_BY_USERNAME_QUERY = "select g.id, g.group_name, ga.authority " +
+//            "from groups g, group_members gm, group_authorities ga " +
+//            "where gm.username = ? " + "and g.id = ga.group_id " + "and g.id = gm.group_id";
 
     @Autowired
     private DataSource dataSource;
@@ -35,18 +35,18 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withDefaultSchema()
 //                .withUser("user")
 //                    .password(passwordEncoder().encode("pass"))
-//                    .password("pass")
+//                   // .password("pass")
 //                        .roles("USER").and()
 //                .withUser("admin")
 //                    .password(passwordEncoder().encode("pass"))
-//                    .password("pass")
+//                   // .password("pass")
 //                        .roles("ADMIN");
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -56,6 +56,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 //
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/register.html").permitAll()
+                .antMatchers("/h**").permitAll()
                 .antMatchers("/**").authenticated()
                 .antMatchers("/profile-1**", "/table**").hasAuthority("ROLE_USER")
                 .antMatchers("/agency**", "/buses**", "/trips**", "/profile.html**", "/index**").hasAuthority("ROLE_ADMIN")
@@ -68,9 +69,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login.html")
                     .loginProcessingUrl("/authenticate")
-                    .permitAll()
-                .and()
-                .logout().permitAll();
+                    .permitAll();
+//                .and()
+//                .logout().permitAll();
 
 
         http.csrf().disable();

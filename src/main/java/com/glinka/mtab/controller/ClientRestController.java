@@ -3,6 +3,7 @@ package com.glinka.mtab.controller;
 import com.glinka.mtab.dto.*;
 import com.glinka.mtab.model.entity.*;
 import com.glinka.mtab.service.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -96,6 +97,9 @@ public class ClientRestController {
     public User newClient(@ModelAttribute("user") UserDto userDto){
         if (userDto.getRoleId() == null)
             userDto.setRoleId(5L);
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        System.out.println(bcrypt.encode(userDto.getPassword()));
+        System.out.println(userDto);
         userDto.setPassword("{noop}" + userDto.getPassword());
         return userService.save(userDto);
     }
