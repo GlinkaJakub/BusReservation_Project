@@ -1,2 +1,2 @@
-# MTAB_Project
-Projekt na zajęcia "Metody tworzenia aplikacji bazodanowych"
+# BusReservation_Project
+Projekt na zajęcia "Wykorzystanie MS SQL i pakietów MS Business Intelligence do budowy aplikacji"
